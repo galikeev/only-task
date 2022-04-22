@@ -66,9 +66,10 @@ const Warning = styledComponents.div`
 `;
 
 
-const LoginPage = ({onSubmit, error}) => {
+const LoginPage = ({onSubmit, error, disabledBtn}) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const disibledColor = disabledBtn ? {'background': '#99A9FF'} : null;
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +92,7 @@ const LoginPage = ({onSubmit, error}) => {
                     style={{border: errors.password && '1px solid #E26F6F'}}/>
                 {errors.password && <Error>Обязательное поле</Error>}
             </Label>
-            <Button type="submit" value="Войти"/>
+            <Button type="submit" value="Войти" disabled={disabledBtn} style={disibledColor}/>
         </Form>
     );
 };

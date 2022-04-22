@@ -11,7 +11,8 @@ const AppRouter = () => {
             email: '',
             password: '',
             isAuth: false,
-            error: ''
+            error: '',
+            disabledBtn: false
         }
     })
 
@@ -26,28 +27,40 @@ const AppRouter = () => {
         }
     }, [])
 
-    const onSubmit = ({email, password}) => {
-        if (email === 'steve.jobs@example.com' && password === 'password') {
-            localStorage.setItem('email', email);
-            setLogin(() => {
-                return {
-                    email: email,
-                    password: password,
-                    isAuth: true,
-                    error: ''
-                }
-            })
-            return Promise.resolve();
-        }
-        localStorage.removeItem('email');
+    const onSubmit = async ({email, password}) => {
         setLogin((prev) => {
             return {
                 ...prev,
-                error: `Пользователя ${email} не существует`
+                disabledBtn: true
             }
         })
-        const error = `Пользователя ${email} не существует`;
-        return Promise.reject(error);
+        try {
+            if (email === 'steve.jobs@example.com' && password === 'password') {
+                setTimeout(() => {
+                    localStorage.setItem('email', email);
+                    setLogin((prev) => {
+                        return {
+                            ...prev,
+                            email: email,
+                            password: password,
+                            isAuth: true,
+                            disabledBtn: false
+                        }
+                    })
+                    return Promise.resolve();
+                }, 1000)
+            }
+        } catch(e) {
+            localStorage.removeItem('email');
+            setLogin((prev) => {
+                return {
+                    ...prev,
+                    error: `Пользователя ${email} не существует`
+                }
+            })
+            const error = `Пользователя ${email} не существует`;
+            return await Promise.reject(error);
+        }
     };
 
     const logout = () => {
@@ -69,7 +82,7 @@ const AppRouter = () => {
                 {!login.isAuth 
                     ? 
                     <>
-                        <Route path="/login" element={<LoginPage onSubmit={onSubmit} error={login.error}/>}/>
+                        <Route path="/login" element={<LoginPage onSubmit={onSubmit} error={login.error} disabledBtn={login.disabledBtn}/>}/>
                         <Route path='*' element={<Navigate to="/login" replace/>}/>
                     </> 
                     : 
