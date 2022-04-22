@@ -50,16 +50,20 @@ const AppRouter = () => {
                     return Promise.resolve();
                 }, 1000)
             }
+            setTimeout(() => {
+                localStorage.removeItem('email');
+                setLogin((prev) => {
+                    return {
+                        ...prev,
+                        disabledBtn: false,
+                        error: `Пользователя ${email} не существует`
+                    }
+                })
+                const error = `Пользователя ${email} не существует`;
+                return Promise.reject(error);
+            }, 1000)
         } catch(e) {
             localStorage.removeItem('email');
-            setLogin((prev) => {
-                return {
-                    ...prev,
-                    error: `Пользователя ${email} не существует`
-                }
-            })
-            const error = `Пользователя ${email} не существует`;
-            return await Promise.reject(error);
         }
     };
 
