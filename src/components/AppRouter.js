@@ -36,8 +36,8 @@ const AppRouter = () => {
         })
         try {
             if (email === 'steve.jobs@example.com' && password === 'password') {
+                localStorage.setItem('email', email);
                 setTimeout(() => {
-                    localStorage.setItem('email', email);
                     setLogin((prev) => {
                         return {
                             ...prev,
@@ -51,7 +51,6 @@ const AppRouter = () => {
                 }, 1000)
             }
             setTimeout(() => {
-                localStorage.removeItem('email');
                 setLogin((prev) => {
                     return {
                         ...prev,
@@ -64,6 +63,7 @@ const AppRouter = () => {
             }, 1000)
         } catch(e) {
             localStorage.removeItem('email');
+            console.log(e);
         }
     };
 
