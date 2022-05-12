@@ -13,14 +13,6 @@ const Input = styledComponents.input`
     outline: none;
 `;
 
-const Form = styledComponents.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
-`;
-
 const Label = styledComponents.div`
     display: flex;
     flex-direction: column;
@@ -34,6 +26,7 @@ const Button = styledComponents(Input)`
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
+    margin-top: 20px;
 `;
 
 const Error = styledComponents.span`
@@ -47,12 +40,12 @@ const NotFound = styledComponents.div`
     height: 60px;
     background: #F5E9E9;
     border: 1px solid #E26F6F;
-    box-sizing: border-box;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 20px;
+    margin-bottom: 27px;
 `;
 
 const Warning = styledComponents.div`
@@ -72,7 +65,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
     const disibledColor = disabledBtn ? {'background': '#99A9FF'} : null;
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             {error ? <NotFound><Warning>!</Warning>{error}</NotFound> : ''}
             <Label>
                 <label htmlFor="email">Логин</label>
@@ -85,7 +78,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
                 {errors.email && <Error>Обязательное поле</Error>}
             </Label>
             <Label>
-                <label htmlFor="email">Пароль</label>
+                <label htmlFor="email" style={{'marginTop': '20px'}}>Пароль</label>
                 <Input 
                     placeholder="enter password" 
                     type="password"
@@ -95,7 +88,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
                 {errors.password && <Error>Обязательное поле</Error>}
             </Label>
             <Button type="submit" value="Войти" disabled={disabledBtn} style={disibledColor}/>
-        </Form>
+        </form>
     );
 };
 

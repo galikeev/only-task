@@ -12,15 +12,16 @@ const Button = styledComponents.button`
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
+    margin-top: 50px;
 `;
 
 const HomePage = ({logout, email}) => {
 
     return (
-        <div className="container">
+        <>
             <div>Здравствуйте, <span style={{'fontWeight': '700'}}>{email}</span></div>
             <Button onClick={logout}>Выйти</Button>
-        </div>
+        </>
     );
 };
 
