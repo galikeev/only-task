@@ -49,18 +49,31 @@ const AppRouter = () => {
                     })
                     return Promise.resolve();
                 }, 1000)
+            } else if (email === 'steve.jobs@example.com' && password !== 'password') {
+                setTimeout(() => {
+                    setLogin((prev) => {
+                        return {
+                            ...prev,
+                            disabledBtn: false,
+                            error: `Неверный пароль`
+                        }
+                    })
+                    const error = `Неверный пароль`;
+                    return Promise.reject(error);
+                }, 1000)
+            } else {
+                setTimeout(() => {
+                    setLogin((prev) => {
+                        return {
+                            ...prev,
+                            disabledBtn: false,
+                            error: `Пользователя ${email} не существует`
+                        }
+                    })
+                    const error = `Пользователя ${email} не существует`;
+                    return Promise.reject(error);
+                }, 1000)
             }
-            setTimeout(() => {
-                setLogin((prev) => {
-                    return {
-                        ...prev,
-                        disabledBtn: false,
-                        error: `Пользователя ${email} не существует`
-                    }
-                })
-                const error = `Пользователя ${email} не существует`;
-                return Promise.reject(error);
-            }, 1000)
         } catch(e) {
             localStorage.removeItem('email');
             console.log(e);
