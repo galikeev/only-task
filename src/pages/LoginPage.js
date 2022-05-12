@@ -78,6 +78,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
                 <label htmlFor="email">Логин</label>
                 <Input 
                     placeholder="enter email" 
+                    type="email"
                     name="email"
                     {...register('email', {required: true})}
                     style={{border: errors.email && '1px solid #E26F6F'}}/>
@@ -87,6 +88,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
                 <label htmlFor="email">Пароль</label>
                 <Input 
                     placeholder="enter password" 
+                    type="password"
                     name="password"
                     {...register('password', {required: true})}
                     style={{border: errors.password && '1px solid #E26F6F'}}/>
