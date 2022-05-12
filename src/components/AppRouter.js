@@ -21,6 +21,7 @@ const AppRouter = () => {
             setLogin((prev) => {
                 return {
                     ...prev,
+                    email: localStorage.getItem('email'),
                     isAuth: true
                 }
             })
