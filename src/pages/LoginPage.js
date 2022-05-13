@@ -70,7 +70,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
             <Label>
                 <label htmlFor="email">Логин</label>
                 <Input 
-                    placeholder="enter email" 
+                    placeholder="Введите email" 
                     type="email"
                     name="email"
                     {...register('email', {required: true})}
@@ -80,7 +80,7 @@ const LoginPage = ({onSubmit, error, disabledBtn}) => {
             <Label>
                 <label htmlFor="email" style={{'marginTop': '20px'}}>Пароль</label>
                 <Input 
-                    placeholder="enter password" 
+                    placeholder="Введите пароль" 
                     type="password"
                     name="password"
                     {...register('password', {required: true})}
